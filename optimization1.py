@@ -1,33 +1,3 @@
-'''amount_n, time, distance_s = map(int, input().split())
-if (amount_n < 2) or (amount_n > 1000000):
-    print('out of range')
-    exit()
-if time < 1:
-    print('out of range')
-    exit()
-if distance_s > 1000000:
-    print('out of range')
-    exit()
-
-speed = list(map(int, input().split()))
-if len(speed) != amount_n:
-    print('Invalid number of velocities')
-    exit()
-
-
-total_distance = [0] * amount_n
-
-overtakes = 0
-
-
-for i in range(amount_n):
-    total_distance[i] = (speed[i] * time) % distance_s
-    overtakes += max(0, ((speed[0] - speed[i]) * time + distance_s - 1) // distance_s)
-
-
-print(f"Количество обгонов автомобилем с номером 1: {overtakes}")'''
-
-# a= -2 b = 6 e=0.001 f(x) = -x*e^(-x)
 import math
 
 
