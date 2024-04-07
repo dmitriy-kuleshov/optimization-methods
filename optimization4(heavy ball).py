@@ -37,15 +37,20 @@ result, trajectory = heavy_ball_method(initial_point, learning_rate, momentum, n
 print("Минимум функции достигается в точке:", result)
 print("Значение функции в минимуме:", f(result[0], result[1]))
 
-x1 = np.linspace(-1.5, 1.5, 100)
-x2 = np.linspace(-1.5, 1.5, 100)
-X, Y = np.meshgrid(x1, x2)
-Z = f(X, Y)
+x1 = np.linspace(-1.1, 1.1, 400)
+x2 = np.linspace(-1.1, 1.1, 400)
+X1, X2 = np.meshgrid(x1, x2)
+Z = f(X1, X2)
 
-plt.figure(figsize=(8, 6))
-plt.contourf(X, Y, Z, levels=np.logspace(0, 5, 35), cmap='gray', alpha=0.3)
-plt.plot(trajectory[:, 0], trajectory[:, 1], '-o', color='red')  # Траектория движения к минимуму
-plt.title('Траектория движения к минимуму')
+plt.figure(figsize=(10, 6))
+plt.contour(X1, X2, Z, levels=50)
 plt.xlabel('x1')
 plt.ylabel('x2')
+plt.title('График функции')
+plt.grid(True)
+
+x1_values = trajectory[:, 0]
+x2_values = trajectory[:, 1]
+plt.plot(x1_values, x2_values, '-o', markersize=3, color='red')
+
 plt.show()
