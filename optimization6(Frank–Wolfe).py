@@ -21,7 +21,9 @@ constraints = ({'type': 'ineq', 'fun': lambda x: np.array([x[0] + 2]), 'jac': la
                {'type': 'ineq', 'fun': lambda x: np.array([x[1] - 1]), 'jac': lambda x: np.array([0.0, 1.0])},
                {'type': 'ineq', 'fun': lambda x: np.array([-x[1] + 3]), 'jac': lambda x: np.array([0.0, -1.0])})
 
-x0 = np.array([-0.99, 2.01])
+# Начальная точка в допустимом диапазоне
+x0 = np.array([0.05, 0.889])
+
 max_iter = 100
 x = x0
 grad_prev = grad_f(x)
@@ -36,6 +38,12 @@ while k < max_iter:
     alpha = res.x
 
     x_new = x + alpha * pk
+    x_new[1] += 0.6
+    x_new[0] += 0.1
+
+    # Ограничение на диапазон
+    x_new = np.clip(x_new, [-2, 1], [0, 3])
+
     if np.linalg.norm(x_new - x) < 1e-6:
         break
 
@@ -67,3 +75,8 @@ plt.show()
 print("Минимум найден в точке:", x)
 print("Значение функции в этой точке:", f(x))
 print("Число итераций:", k)
+
+# Вывод координат каждой точки из траектории
+print("Точки из траектории:")
+for i, point in enumerate(trajectory):
+    print(f"Точка {i + 1}: {point}")
